@@ -1,4 +1,5 @@
-export default {
+module.exports = {
   presets: ["@vue/cli-plugin-babel/preset"],
-  requireConfigFile: false, // 取消註解這行
+  // 新增這行以解決錯誤
+  requireConfigFile: false,
 };

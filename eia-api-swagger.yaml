@@ -1,0 +1,5234 @@
+openapi: 3.0.0
+info:
+  title: 'EIA APIv2'
+  description: 'Swagger UI interface for EIA''s APIv2.  You can also explore EIA''s API using the [Opendata Query Browser](https://www.eia.gov/opendata/browser/).  For this UI, you must use your EIA `api key` to apply filters and return data. You can register for an API Key at [https://www.eia.gov/opendata/](https://www.eia.gov/opendata/)'
+  version: 2.1.0
+servers:
+  -
+    url: 'https://api.eia.gov'
+paths:
+  '/v2/aeo/{route1}':
+    get:
+      tags:
+        - AEO
+      parameters:
+        -
+          name: route1
+          in: path
+          description: 'Available AEO year data route'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+  '/v2/aeo/{route1}/facet':
+    get:
+      tags:
+        - AEO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+  '/v2/aeo/{route1}/facet/{facet_id}':
+    get:
+      tags:
+        - AEO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/aeo/{route1}/data':
+    get:
+      tags:
+        - AEO
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - AEO
+      summary: 'Return AEO Data'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+  '/v2/ieo/{route1}':
+    get:
+      tags:
+        - IEO
+      operationId: 'EIA\API\Controllers\Dataset\AeoIeo\IeoController::__construct'
+      parameters:
+        -
+          name: route1
+          in: path
+          description: 'Available AEO year data route'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+  '/v2/ieo/{route1}/facet':
+    get:
+      tags:
+        - IEO
+      operationId: 'EIA\API\Controllers\Dataset\AeoIeo\IeoController::route_facet'
+      parameters:
+        -
+          name: route1
+          in: path
+          description: 'Available AEO year data route'
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+  '/v2/ieo/{route1}/facet/{facet_id}':
+    get:
+      tags:
+        - IEO
+      operationId: 'EIA\API\Controllers\Dataset\AeoIeo\IeoController::route_facetId'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/ieo/{route1}/data':
+    get:
+      tags:
+        - IEO
+      description: 'API data with query params'
+      operationId: 'EIA\API\Controllers\Dataset\AeoIeo\IeoController::get_data'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - IEO
+      summary: 'Return IEO Data'
+      operationId: 'EIA\API\Controllers\Dataset\AeoIeo\IeoController::post_data'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+  '/v2/co2-emissions/co2-emissions-aggregates/facet/{facet_id}':
+    get:
+      tags:
+        - EMISS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/co2-emissions/co2-emissions-and-carbon-coefficients/facet/{facet_id}':
+    get:
+      tags:
+        - EMISS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/aggregate-production/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/consumption-and-quality/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/exports-imports-quantity-price/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/market-sales-price/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/mine-production/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/price-by-rank/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/reserves-capacity/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/shipments/by-mine-by-plant/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/shipments/mine-aggregates/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/shipments/mine-state-aggregates/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/shipments/plant-aggregates/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/shipments/plant-state-aggregates/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/coal/shipments/receipts/facet/{facet_id}':
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/crude-oil-imports/facet/{facet_id}':
+    get:
+      tags:
+        - CRUD_IMPORTS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/densified-biomass/capacity-by-region/facet/{facet_id}':
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/densified-biomass/characteristics-by-region/facet/{facet_id}':
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/densified-biomass/export-sales-and-price/facet/{facet_id}':
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/densified-biomass/feedstocks-and-cost/facet/{facet_id}':
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/densified-biomass/inventories-by-region/facet/{facet_id}':
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/densified-biomass/production-by-region/facet/{facet_id}':
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/densified-biomass/sales-and-price-by-region/facet/{facet_id}':
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/densified-biomass/wood-pellet-plants/facet/{facet_id}':
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/facility-fuel/facet/{facet_id}':
+    get:
+      tags:
+        - ELEC
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/electric-power-operational-data/facet/{facet_id}':
+    get:
+      tags:
+        - ELEC
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/operating-generator-capacity/facet/{facet_id}':
+    get:
+      tags:
+        - ELEC
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/retail-sales/facet/{facet_id}':
+    get:
+      tags:
+        - ELEC
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/state-electricity-profiles/capability/facet/{facet_id}':
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/state-electricity-profiles/emissions-by-state-by-fuel/facet/{facet_id}':
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/state-electricity-profiles/energy-efficiency/facet/{facet_id}':
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/state-electricity-profiles/meters/facet/{facet_id}':
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/state-electricity-profiles/net-metering/facet/{facet_id}':
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/state-electricity-profiles/source-disposition/facet/{facet_id}':
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/state-electricity-profiles/summary/facet/{facet_id}':
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/rto/daily-interchange-data/facet/{facet_id}':
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/rto/daily-fuel-type-data/facet/{facet_id}':
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/rto/daily-region-sub-ba-data/facet/{facet_id}':
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/rto/daily-region-data/facet/{facet_id}':
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/rto/interchange-data/facet/{facet_id}':
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/rto/fuel-type-data/facet/{facet_id}':
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/rto/region-sub-ba-data/facet/{facet_id}':
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/electricity/rto/region-data/facet/{facet_id}':
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/international/facet/{facet_id}':
+    get:
+      tags:
+        - INTL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/nuclear-outages/facility-nuclear-outages/facet/{facet_id}':
+    get:
+      tags:
+        - NUC_STATUS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/nuclear-outages/generator-nuclear-outages/facet/{facet_id}':
+    get:
+      tags:
+        - NUC_STATUS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/nuclear-outages/us-nuclear-outages/facet/{facet_id}':
+    get:
+      tags:
+        - NUC_STATUS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/natural-gas/{route1}/{route2}':
+    get:
+      tags:
+        - NG
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+      -
+        $ref: '#/components/parameters/route2'
+  '/v2/natural-gas/{route1}':
+    get:
+      tags:
+        - NG
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+  '/v2/natural-gas/{route1}/{route2}/facet/{facet_id}':
+    get:
+      tags:
+        - NG
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+      -
+        $ref: '#/components/parameters/route2'
+      -
+        $ref: '#/components/parameters/facetId'
+  '/v2/natural-gas/{route1}/{route2}/facet':
+    get:
+      tags:
+        - NG
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+      -
+        $ref: '#/components/parameters/route2'
+  '/v2/natural-gas/{route1}/{route2}/data':
+    get:
+      tags:
+        - NG
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '405':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - NG
+      summary: 'Return Natural Gas Data'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '405':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    parameters:
+      -
+        $ref: '#/components/parameters/route1'
+      -
+        $ref: '#/components/parameters/route2'
+  '/v2/total-energy/facet/{facet_id}':
+    get:
+      tags:
+        - TOTAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+    parameters:
+      -
+        $ref: '#/components/parameters/facetId'
+  /v2/seds:
+    get:
+      tags:
+        - SEDS
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/seds/facet:
+    get:
+      tags:
+        - SEDS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  '/v2/seds/facet/{facet_id}':
+    get:
+      tags:
+        - SEDS
+      parameters:
+        -
+          name: facet_id
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+  /v2/seds/data:
+    get:
+      tags:
+        - SEDS
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '404':
+          description: 'Not Found'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - SEDS
+      summary: 'Return SEDS Data'
+      description: "Class SEDSController\n\nSEDS data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/steo:
+    get:
+      tags:
+        - STEO
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/steo/facet:
+    get:
+      tags:
+        - STEO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  '/v2/steo/facet/{facet_id}':
+    get:
+      tags:
+        - STEO
+      parameters:
+        -
+          name: facet_id
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facet'
+  /v2/steo/data:
+    get:
+      tags:
+        - STEO
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - STEO
+      summary: 'Class STEOController'
+      description: 'STEO data set top-level controller.'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/aeo:
+    get:
+      tags:
+        - AEO
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/ieo:
+    get:
+      tags:
+        - IEO
+      operationId: 'EIA\API\Controllers\Dataset\AeoIeo\IeoController::ieo'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/co2-emissions/co2-emissions-aggregates:
+    get:
+      tags:
+        - EMISS
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/co2-emissions/co2-emissions-aggregates/facet:
+    get:
+      tags:
+        - EMISS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/co2-emissions/co2-emissions-aggregates/data:
+    get:
+      tags:
+        - EMISS
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - EMISS
+      summary: 'Return co2-emissions-aggregates Data'
+      description: "Class CO2EmissionsAggregatesController\n\nCO2 Emissions Aggregates data set controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/co2-emissions/co2-emissions-and-carbon-coefficients:
+    get:
+      tags:
+        - EMISS
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/co2-emissions/co2-emissions-and-carbon-coefficients/facet:
+    get:
+      tags:
+        - EMISS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/co2-emissions/co2-emissions-and-carbon-coefficients/data:
+    get:
+      tags:
+        - EMISS
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - EMISS
+      summary: 'Return co2-emissions-and-carbon-coefficients Data'
+      description: "Class CO2EmissionsAndCarbonCoefficientsController\n\nCO2 Emissions Aggregates data set controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/co2-emissions:
+    get:
+      tags:
+        - EMISS
+      summary: 'Class CO2EmissionsController'
+      description: 'CO2 Emissions data set top-level controller.'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/coal/aggregate-production:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/aggregate-production/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/aggregate-production/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return aggregate-production Data'
+      description: "Class AggregateProductionController\n\nAggregate Production data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal:
+    get:
+      tags:
+        - COAL
+      summary: 'Class CoalController'
+      description: 'Coal data set top-level controller.'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/coal/consumption-and-quality:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/consumption-and-quality/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/consumption-and-quality/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return consumption-and-quality Data'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/exports-imports-quantity-price:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/exports-imports-quantity-price/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/exports-imports-quantity-price/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return exports-imports-quantity-price Data'
+      description: "Class ExportsImportsQuantityPriceController\n\nExports\\Imports Quantity\\Price data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/market-sales-price:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/market-sales-price/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/market-sales-price/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return market-sales-price Data'
+      description: "Class MarketSalesPriceController\n\nMarket Sales Price data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/mine-production:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/mine-production/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/mine-production/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return mine-production Data'
+      description: "Class MinProductionController\n\nMine Production data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/price-by-rank:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/price-by-rank/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/price-by-rank/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return price-by-rank Data'
+      description: "Class PriceByRankController\n\nPrice By Rank data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/reserves-capacity:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/reserves-capacity/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/reserves-capacity/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return reserves-capacity data'
+      description: "Class ReservesCapacityController\n\nReserves Capacity data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/shipments/by-mine-by-plant:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/shipments/by-mine-by-plant/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/shipments/by-mine-by-plant/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return shipments by-mine-by-plant data'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/shipments/mine-aggregates:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/shipments/mine-aggregates/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/shipments/mine-aggregates/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return shipments mine-aggregates data'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/shipments/mine-state-aggregates:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/shipments/mine-state-aggregates/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/shipments/mine-state-aggregates/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return shipments mine-state-aggregates data'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/shipments/plant-aggregates:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/shipments/plant-aggregates/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/shipments/plant-aggregates/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return shipments plant-aggregates data'
+      description: "Class PlantAggregateController\n\nCoal\\Shipments dataset controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/shipments/plant-state-aggregates:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/shipments/plant-state-aggregates/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/shipments/plant-state-aggregates/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return shipments plant-state-aggregates data'
+      description: "Class PlantStateAggregateController\n\nCoal\\Shipments dataset controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/shipments/receipts:
+    get:
+      tags:
+        - COAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/coal/shipments/receipts/facet:
+    get:
+      tags:
+        - COAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/coal/shipments/receipts/data:
+    get:
+      tags:
+        - COAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - COAL
+      summary: 'Return shipments receipts data'
+      description: "Class ReceiptsController\n\nCoal\\Shipments dataset controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/coal/shipments:
+    get:
+      tags:
+        - COAL
+      summary: 'Class CoalController'
+      description: 'Coal data set top-level controller.'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/crude-oil-imports:
+    get:
+      tags:
+        - CRUD_IMPORTS
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/crude-oil-imports/facet:
+    get:
+      tags:
+        - CRUD_IMPORTS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/crude-oil-imports/data:
+    get:
+      tags:
+        - CRUD_IMPORTS
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - CRUD_IMPORTS
+      summary: 'Return crude oil imports Data'
+      description: "Class Crude Oil Imports ontroller\n\nSEDS data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/densified-biomass/capacity-by-region:
+    get:
+      tags:
+        - DBF
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/densified-biomass/capacity-by-region/facet:
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/densified-biomass/capacity-by-region/data:
+    get:
+      tags:
+        - DBF
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - DBF
+      summary: 'Return biomass capacity-by-region Data'
+      description: "Class CapacityByRegionController\n\nCapacityByRegion data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/densified-biomass/characteristics-by-region:
+    get:
+      tags:
+        - DBF
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/densified-biomass/characteristics-by-region/facet:
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/densified-biomass/characteristics-by-region/data:
+    get:
+      tags:
+        - DBF
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - DBF
+      summary: 'Return biomass characteristics-by-region Data'
+      description: "Class CharacteristicsByRegionController\n\nCharacteristicsByRegion data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/densified-biomass:
+    get:
+      tags:
+        - DBF
+      summary: 'Class  Controller'
+      description: 'Densified Biomass data set top-level controller.'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/densified-biomass/export-sales-and-price:
+    get:
+      tags:
+        - DBF
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/densified-biomass/export-sales-and-price/facet:
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/densified-biomass/export-sales-and-price/data:
+    get:
+      tags:
+        - DBF
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - DBF
+      summary: 'Return biomass export-sales-and-price Data'
+      description: "Class ExportSalesAndPriceController\n\nExportSalesAndPrice data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/densified-biomass/feedstocks-and-cost:
+    get:
+      tags:
+        - DBF
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/densified-biomass/feedstocks-and-cost/facet:
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/densified-biomass/feedstocks-and-cost/data:
+    get:
+      tags:
+        - DBF
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - DBF
+      summary: 'Return biomass feedstocks-and-cost Data'
+      description: "Class FeedstocksAndCostController\n\nFeedstocksAndCost data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/densified-biomass/inventories-by-region:
+    get:
+      tags:
+        - DBF
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/densified-biomass/inventories-by-region/facet:
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/densified-biomass/inventories-by-region/data:
+    get:
+      tags:
+        - DBF
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - DBF
+      summary: 'Return biomass inventories-by-region Data'
+      description: "Class InventoriesByRegionController\n\nInventoriesByRegion data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/densified-biomass/production-by-region:
+    get:
+      tags:
+        - DBF
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/densified-biomass/production-by-region/facet:
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/densified-biomass/production-by-region/data:
+    get:
+      tags:
+        - DBF
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - DBF
+      summary: 'Return biomass production-by-region Data'
+      description: "Class ProductionByRegionController\n\nProductionByRegion data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/densified-biomass/sales-and-price-by-region:
+    get:
+      tags:
+        - DBF
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/densified-biomass/sales-and-price-by-region/facet:
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/densified-biomass/sales-and-price-by-region/data:
+    get:
+      tags:
+        - DBF
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - DBF
+      summary: 'Return biomass sales-and-price-by-region Data'
+      description: "Class SalesAndPriceByRegionController\n\nSalesAndPriceByRegion data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/densified-biomass/wood-pellet-plants:
+    get:
+      tags:
+        - DBF
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/densified-biomass/wood-pellet-plants/facet:
+    get:
+      tags:
+        - DBF
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/densified-biomass/wood-pellet-plants/data:
+    get:
+      tags:
+        - DBF
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - DBF
+      summary: 'Return biomass wood-pellet-plants Data'
+      description: "Class WoodPelletPlantsController\n\nWoodPelletPlants data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity:
+    get:
+      tags:
+        - ELEC
+      summary: 'Class ElectricityController'
+      description: 'Electricity data set top-level controller.'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/electricity/facility-fuel:
+    get:
+      tags:
+        - ELEC
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/facility-fuel/facet:
+    get:
+      tags:
+        - ELEC
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/facility-fuel/data:
+    get:
+      tags:
+        - ELEC
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - ELEC
+      summary: 'Class FacilityFuelController'
+      description: 'Electricity FacilityFuel dataset controller.'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/electric-power-operational-data:
+    get:
+      tags:
+        - ELEC
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/electric-power-operational-data/facet:
+    get:
+      tags:
+        - ELEC
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/electric-power-operational-data/data:
+    get:
+      tags:
+        - ELEC
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - ELEC
+      summary: 'Return Electricity electric-power-operational Data'
+      description: "Class GenerationController\n\nElectricity generation dataset controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/operating-generator-capacity:
+    get:
+      tags:
+        - ELEC
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/operating-generator-capacity/facet:
+    get:
+      tags:
+        - ELEC
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/operating-generator-capacity/data:
+    get:
+      tags:
+        - ELEC
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - ELEC
+      summary: 'Return Electricity operating-generator-capacity Data'
+      description: "Class GeneratorLevelCapacityController\n\nElectricity generation dataset controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/retail-sales:
+    get:
+      tags:
+        - ELEC
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/retail-sales/facet:
+    get:
+      tags:
+        - ELEC
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/retail-sales/data:
+    get:
+      tags:
+        - ELEC
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - ELEC
+      summary: 'Return Electricity retail-sales Data'
+      description: "Class RetailSalesController\n\nElectricity retail sales dataset controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/state-electricity-profiles/capability:
+    get:
+      tags:
+        - SEP
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/state-electricity-profiles/capability/facet:
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/state-electricity-profiles/capability/data:
+    get:
+      tags:
+        - SEP
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - SEP
+      summary: 'Class CapabilityDataController'
+      description: 'Electricity capability dataset controller.'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/state-electricity-profiles/emissions-by-state-by-fuel:
+    get:
+      tags:
+        - SEP
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/state-electricity-profiles/emissions-by-state-by-fuel/facet:
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/state-electricity-profiles/emissions-by-state-by-fuel/data:
+    get:
+      tags:
+        - SEP
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - SEP
+      summary: 'Return sep emissions-by-state-by-fuel Data'
+      description: "Class EmissionsByStateByFuelController\n\nElectricity emissions EmissionsByStateByFuelController dataset controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/state-electricity-profiles/energy-efficiency:
+    get:
+      tags:
+        - SEP
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/state-electricity-profiles/energy-efficiency/facet:
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/state-electricity-profiles/energy-efficiency/data:
+    get:
+      tags:
+        - SEP
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - SEP
+      summary: 'Return sep energy-effiency Data'
+      description: "Class EnergyEfficiencyController\n\nElectricity EnergyEfficiencyController dataset controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/state-electricity-profiles/meters:
+    get:
+      tags:
+        - SEP
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/state-electricity-profiles/meters/facet:
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/state-electricity-profiles/meters/data:
+    get:
+      tags:
+        - SEP
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - SEP
+      summary: 'Return sep meters Data'
+      description: 'Class MetersController'
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/state-electricity-profiles/net-metering:
+    get:
+      tags:
+        - SEP
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/state-electricity-profiles/net-metering/facet:
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/state-electricity-profiles/net-metering/data:
+    get:
+      tags:
+        - SEP
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - SEP
+      summary: 'Return sep net-metering Data'
+      description: "Class NetMeteringController\n\nNuclear Outages data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/sep:
+    get:
+      tags:
+        - SEP
+      summary: 'Class SEPController'
+      description: 'Nuclear Outages data set top-level controller.'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/electricity/state-electricity-profiles/source-disposition:
+    get:
+      tags:
+        - SEP
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/state-electricity-profiles/source-disposition/facet:
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/state-electricity-profiles/source-disposition/data:
+    get:
+      tags:
+        - SEP
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - SEP
+      summary: 'Return sep source-disposition Data'
+      description: "Class SourceDispositionDataController\n\nElectricity SourceDisposition dataset controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/state-electricity-profiles/summary:
+    get:
+      tags:
+        - SEP
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/state-electricity-profiles/summary/facet:
+    get:
+      tags:
+        - SEP
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/state-electricity-profiles/summary/data:
+    get:
+      tags:
+        - SEP
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - SEP
+      summary: 'Return sep summary Data'
+      description: "Class SourceSummaryDataController\n\nElectricity SourceSummary dataset controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/rto/daily-interchange-data:
+    get:
+      tags:
+        - RTO
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/rto/daily-interchange-data/facet:
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/rto/daily-interchange-data/data:
+    get:
+      tags:
+        - RTO
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - RTO
+      summary: 'Return daily-interchange Data'
+      description: "Class DailyInterchangeDataController\n\nDaily Interchange data set controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/rto/daily-fuel-type-data:
+    get:
+      tags:
+        - RTO
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/rto/daily-fuel-type-data/facet:
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/rto/daily-fuel-type-data/data:
+    get:
+      tags:
+        - RTO
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - RTO
+      summary: 'Return daily-fuel-type Data'
+      description: "Class DailyRegionDataByFuelTypeController\n\nDaily region data by fuel type set controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/rto/daily-region-sub-ba-data:
+    get:
+      tags:
+        - RTO
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/rto/daily-region-sub-ba-data/facet:
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/rto/daily-region-sub-ba-data/data:
+    get:
+      tags:
+        - RTO
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - RTO
+      summary: 'Return daily-region-sub-ba Data'
+      description: "Class DailyRegionDataBySubBAController\n\nDaily region data by sub ba data set controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/rto/daily-region-data:
+    get:
+      tags:
+        - RTO
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/rto/daily-region-data/facet:
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/rto/daily-region-data/data:
+    get:
+      tags:
+        - RTO
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - RTO
+      summary: 'Return daily-region Data'
+      description: "Class DailyRegionDataController\n\nDaily region data set controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/rto/interchange-data:
+    get:
+      tags:
+        - RTO
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/rto/interchange-data/facet:
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/rto/interchange-data/data:
+    get:
+      tags:
+        - RTO
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - RTO
+      summary: 'Return interchange Data'
+      description: "Class InterchangeDataController\n\nElectricity retail sales data set controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/rto:
+    get:
+      tags:
+        - RTO
+      summary: 'Class RTOController'
+      description: 'RTO data set top-level controller.'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/electricity/rto/fuel-type-data:
+    get:
+      tags:
+        - RTO
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/rto/fuel-type-data/facet:
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/rto/fuel-type-data/data:
+    get:
+      tags:
+        - RTO
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - RTO
+      summary: 'Return fuel-type Data'
+      description: "Class RegionDataByFuelTypeController\n\nElectricity region data set controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/rto/region-sub-ba-data:
+    get:
+      tags:
+        - RTO
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/rto/region-sub-ba-data/facet:
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/rto/region-sub-ba-data/data:
+    get:
+      tags:
+        - RTO
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - RTO
+      summary: 'Return region-sub-ba Data'
+      description: "Class RegionDataBySubBAController\n\nElectricity region data by sub ba data set controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/electricity/rto/region-data:
+    get:
+      tags:
+        - RTO
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/electricity/rto/region-data/facet:
+    get:
+      tags:
+        - RTO
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/electricity/rto/region-data/data:
+    get:
+      tags:
+        - RTO
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - RTO
+      summary: 'Return region Data'
+      description: "Class RegionDataController\n\nElectricity retail sales data set controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/international:
+    get:
+      tags:
+        - INTL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/international/facet:
+    get:
+      tags:
+        - INTL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/international/data:
+    get:
+      tags:
+        - INTL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - INTL
+      summary: 'Return international Data'
+      description: "Class InternationalController\n\nInternational data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/nuclear-outages/facility-nuclear-outages:
+    get:
+      tags:
+        - NUC_STATUS
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/nuclear-outages/facility-nuclear-outages/facet:
+    get:
+      tags:
+        - NUC_STATUS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/nuclear-outages/facility-nuclear-outages/data:
+    get:
+      tags:
+        - NUC_STATUS
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - NUC_STATUS
+      summary: 'Return facility-nuclear-outages Data'
+      description: "Class NuclearOutagesController\n\nNuclear Outages data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/nuclear-outages/generator-nuclear-outages:
+    get:
+      tags:
+        - NUC_STATUS
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/nuclear-outages/generator-nuclear-outages/facet:
+    get:
+      tags:
+        - NUC_STATUS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/nuclear-outages/generator-nuclear-outages/data:
+    get:
+      tags:
+        - NUC_STATUS
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - NUC_STATUS
+      summary: 'Return generator-nuclear-outages Data'
+      description: "Class NuclearOutagesController\n\nNuclear Outages data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/nuclear-outages:
+    get:
+      tags:
+        - NUC_STATUS
+      summary: 'Class NuclearOutagesController'
+      description: 'Nuclear Outages data set top-level controller.'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/nuclear-outages/us-nuclear-outages:
+    get:
+      tags:
+        - NUC_STATUS
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/nuclear-outages/us-nuclear-outages/facet:
+    get:
+      tags:
+        - NUC_STATUS
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/nuclear-outages/us-nuclear-outages/data:
+    get:
+      tags:
+        - NUC_STATUS
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - NUC_STATUS
+      summary: 'Return us-nuclear-outages Data'
+      description: "Class NuclearOutagesController\n\nNuclear Outages data set top-level controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2/natural-gas:
+    get:
+      tags:
+        - NG
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+  /v2/total-energy:
+    get:
+      tags:
+        - TOTAL
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/final-route'
+  /v2/total-energy/facet:
+    get:
+      tags:
+        - TOTAL
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/facets'
+  /v2/total-energy/data:
+    get:
+      tags:
+        - TOTAL
+      description: 'API data with query params'
+      parameters:
+        -
+          $ref: '#/components/parameters/data'
+        -
+          $ref: '#/components/parameters/facets'
+        -
+          $ref: '#/components/parameters/frequency'
+        -
+          $ref: '#/components/parameters/start'
+        -
+          $ref: '#/components/parameters/end'
+        -
+          $ref: '#/components/parameters/sort'
+        -
+          $ref: '#/components/parameters/length'
+        -
+          $ref: '#/components/parameters/offset'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+    post:
+      tags:
+        - TOTAL
+      summary: 'Return Total Energy Data'
+      description: "Class TotalEnergyController\n\nTotal Energy controller."
+      requestBody:
+        $ref: '#/components/requestBodies/dataParams'
+      responses:
+        '400':
+          description: 'Invalid input'
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/data'
+  /v2:
+    get:
+      tags:
+        - Root
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/route'
+components:
+  schemas:
+    Routes:
+      properties:
+        routes:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      type: object
+    RouteRequest:
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+        params: {  }
+      type: object
+    Frequency:
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        format:
+          type: string
+        query:
+          type: string
+      type: object
+    FacetMetaData:
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+      type: object
+    Facet:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        alias:
+          type: string
+      type: object
+    FinalRoute:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        frequency:
+          type: array
+          items:
+            $ref: '#/components/schemas/Frequency'
+        facets:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacetMetaData'
+        data: {  }
+        startPeriod:
+          type: string
+        endPeriod:
+          type: string
+        defaultDateFormat:
+          type: string
+        defaultFrequency:
+          type: string
+      type: object
+    RouteResponse:
+      properties:
+        response:
+          $ref: '#/components/schemas/Routes'
+        request:
+          $ref: '#/components/schemas/RouteRequest'
+      type: object
+    FinalRouteResponse:
+      properties:
+        response:
+          $ref: '#/components/schemas/FinalRoute'
+        request:
+          $ref: '#/components/schemas/RouteRequest'
+      type: object
+    Sort:
+      properties:
+        column:
+          type: string
+        direction:
+          type: string
+      type: object
+    DataParams:
+      properties:
+        data:
+          type: array
+          items:
+            type: string
+        facets:
+          type: object
+        frequency:
+          type: string
+        start:
+          type: string
+        end:
+          type: string
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sort'
+        length:
+          type: integer
+        offset:
+          type: integer
+      type: object
+    DataResponse:
+      properties:
+        data: {  }
+        dateFormat:
+          type: string
+        description:
+          type: string
+        frequency:
+          type: string
+        total:
+          type: integer
+      type: object
+    FacetOptionList:
+      properties:
+        totalFacetOptions:
+          type: integer
+        facetOptions:
+          type: array
+          items:
+            type: string
+      type: object
+    FacetDetails:
+      properties:
+        totalFacets:
+          type: integer
+        facets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Facet'
+      type: object
+    DataResponseContainer:
+      properties:
+        apiVersion:
+          type: string
+        request:
+          $ref: '#/components/schemas/RouteRequest'
+        response:
+          $ref: '#/components/schemas/DataResponse'
+      type: object
+    FinalRouteResponseContainer:
+      properties:
+        apiVersion:
+          type: string
+        request:
+          $ref: '#/components/schemas/RouteRequest'
+        response:
+          $ref: '#/components/schemas/FinalRouteResponse'
+      type: object
+    FacetOptionListContainer:
+      properties:
+        apiVersion:
+          type: string
+        request:
+          $ref: '#/components/schemas/RouteRequest'
+        response:
+          $ref: '#/components/schemas/FacetOptionList'
+      type: object
+    FacetDetailsContainer:
+      properties:
+        apiVersion:
+          type: string
+        request:
+          $ref: '#/components/schemas/RouteRequest'
+        response:
+          $ref: '#/components/schemas/FacetDetails'
+      type: object
+    RouteResponseContainer:
+      properties:
+        apiVersion:
+          type: string
+        request:
+          $ref: '#/components/schemas/RouteRequest'
+        response:
+          $ref: '#/components/schemas/RouteResponse'
+      type: object
+  responses:
+    data:
+      description: 'API Data'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DataResponseContainer'
+    '400':
+      description: 'Invalid input'
+    final-route:
+      description: 'List of API data sets'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FinalRouteResponseContainer'
+    facets:
+      description: 'List of facet options'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FacetOptionListContainer'
+    facet:
+      description: 'Facet details'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FacetDetailsContainer'
+    route:
+      description: 'List of API data sets'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RouteResponseContainer'
+  parameters:
+    data:
+      name: data
+      in: query
+      description: 'Data columns to filter by'
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+    facets:
+      name: facets
+      in: query
+      description: 'Facets to filter by'
+      required: false
+      schema:
+        type: object
+    frequency:
+      name: frequency
+      in: query
+      description: 'Frequency to filter by'
+      required: false
+      schema:
+        type: string
+    start:
+      name: start
+      in: query
+      description: 'Start date to filter by'
+      required: false
+      schema:
+        type: string
+    end:
+      name: end
+      in: query
+      description: 'End date to filter by'
+      required: false
+      schema:
+        type: string
+    sort:
+      name: sort
+      in: query
+      description: 'How to sort returned data'
+      required: false
+      schema:
+        $ref: '#/components/schemas/Sort'
+    length:
+      name: length
+      in: query
+      description: 'Max length of returned data'
+      required: false
+      schema:
+        type: integer
+    offset:
+      name: offset
+      in: query
+      description: 'Offset of returned data'
+      required: false
+      schema:
+        type: integer
+    facetId:
+      name: facet_id
+      in: path
+      description: 'Facet ID'
+      required: true
+      schema:
+        type: string
+    route1:
+      name: route1
+      in: path
+      description: 'First level Sub route'
+      required: true
+      schema:
+        type: string
+    route2:
+      name: route2
+      in: path
+      description: 'Second level Sub route'
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    dataParams:
+      description: 'Parameters for data call'
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DataParams'
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: query
+security:
+  -
+    api_key: []
+tags:
+  -
+    name: SEDS
+    description: 'Access to State Energy Data Systems (SEDS) Data'
+  -
+    name: STEO
+    description: 'Access to Short Term Energy Outlook Data'
+  -
+    name: AEO
+    description: 'Access to Annual Energy Outlook Data'
+  -
+    name: IEO
+    description: 'Access to International Energy Outlook Data'
+  -
+    name: EMISS
+    description: 'Access to CO2 Emissions Data'
+  -
+    name: COAL
+    description: 'Access to Coal Data'
+  -
+    name: CRUD_IMPORTS
+    description: 'Access to Crude Oil Imports Data'
+  -
+    name: DBF
+    description: 'Access to Densified Biomass Data'
+  -
+    name: ELEC
+    description: 'Access to Electricity Data'
+  -
+    name: SEP
+    description: 'Access to State Electricity Profiles'
+  -
+    name: RTO
+    description: 'Access to Daily Electricity Data'
+  -
+    name: INTL
+    description: 'Access to International Data'
+  -
+    name: NUC_STATUS
+    description: 'Access to Nuclear Outages Data'
+  -
+    name: NG
+    description: 'Access to Natural Gas Data'
+  -
+    name: TOTAL
+    description: 'Access to Total Energy Data'
+  -
+    name: Root
+    description: 'Available EIA API Datasets'
+externalDocs:
+  description: 'EIA''s API Technical Documentation'
+  url: 'https://www.eia.gov/opendata/documentation.php'

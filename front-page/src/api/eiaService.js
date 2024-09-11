@@ -20,5 +20,23 @@ export default {
         frequency: frequency
       }
     })
+  },
+  // 新增 AEO 資料的 fetch 函數
+  getAeoData(route1, params) {
+    return apiClient.get(`/aeo/${route1}/data`, {
+      params: {
+        api_key: API_KEY,
+        ...params
+      }
+    })
+  },
+  // 新增 IEO 資料的 fetch 函數
+  getIeoData(route1, params) {
+    return apiClient.get(`/ieo/${route1}/data`, {
+      params: {
+        api_key: API_KEY,
+        ...params
+      }
+    })
   }
 }

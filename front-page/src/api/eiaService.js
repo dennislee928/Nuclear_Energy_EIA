@@ -11,17 +11,6 @@ const apiClient = axios.create({
 })
 
 export default {
-  getRetailSales(stateId, sectorId, frequency) {
-    return apiClient.get(`/electricity/retail-sales/data`, {
-      params: {
-        api_key: API_KEY,
-        'facets[stateid][]': stateId,
-        'facets[sectorid][]': sectorId,
-        frequency: frequency
-      }
-    })
-  },
-  // 新增 AEO 資料的 fetch 函數
   getAeoData(route1, params) {
     return apiClient.get(`/aeo/${route1}/data`, {
       params: {

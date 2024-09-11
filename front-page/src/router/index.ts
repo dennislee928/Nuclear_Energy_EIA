@@ -19,8 +19,8 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
-    { path: '/aeo', name: 'aeo' },
-    { path: '/ieo', name: 'ieo' }
+    { path: '/aeo', name: 'aeo', component: () => import('../views/AeoPage.vue') },
+    { path: '/ieo', name: 'ieo', component: () => import('../views/IeoPage.vue') }
   ]
 })
 

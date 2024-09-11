@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>IEO Data</h1>
-    <button @click="fetchIeoData">fetch IEO Data</button>
     <pre>{{ ieoData }}</pre>
   </div>
 </template>
@@ -13,7 +12,7 @@ export default {
   data() {
     return {
       ieoData: null,
-      route1: 'someRoute', // 根據實際情況設置
+      route1: '2021', // 設置為特定的 IEO 年份或數據集名稱
       params: {
         // 根據實際情況設置查詢參數
       }
@@ -22,10 +21,8 @@ export default {
   created() {
     this.fetchIeoData()
   },
-
   methods: {
     async fetchIeoData() {
-      console.log('IEO START.')
       try {
         const response = await eiaService.getIeoData(this.route1, this.params)
         this.ieoData = response.data

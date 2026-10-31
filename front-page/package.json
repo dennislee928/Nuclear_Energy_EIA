@@ -44,6 +44,7 @@
     "vue-tsc": "^2.0.21"
   },
   "overrides": {
-    "shell-quote": "^1.9.0"
+    "shell-quote": "^1.9.0",
+    "tinypool": "^2.1.2"
   }
 }

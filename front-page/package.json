@@ -45,6 +45,7 @@
   },
   "overrides": {
     "shell-quote": "^1.9.0",
-    "tinypool": "^2.1.2"
+    "tinypool": "^2.1.2",
+    "rollup": "^4.59.0"
   }
 }

@@ -15,15 +15,11 @@
   },
   "dependencies": {
     "@types/vue": "^2.0.0",
-
     "axios": "^1.15.2",
     "pinia": "^2.1.7",
-
     "vite-plugin-vue": "^0.0.1",
-
     "vue": "^3.5.22",
     "vue-router": "^4.3.3"
-
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
@@ -46,5 +42,8 @@
     "vite-plugin-vue-devtools": "^7.3.1",
     "vitest": "^1.6.0",
     "vue-tsc": "^2.0.21"
+  },
+  "overrides": {
+    "shell-quote": "^1.9.0"
   }
 }
